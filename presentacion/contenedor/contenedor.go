@@ -52,6 +52,7 @@ func InicializarContenedor() error {
 
 	// Inicializar el gestor de observadores
 	GestorObservadores = dominio_notificacion.NuevoGestorObservadores()
+	GestorObservadores.RegistrarObservador()
 
 	//CLIENTES
 	ClienteDB, err := infraestructura_db_cliente.InicializarCliente(constantes.DB_CON)
@@ -77,7 +78,10 @@ func InicializarContenedor() error {
 	GestionarNotificaciones = &casosusos.GestionarNotificaciones{
 		CanalEventos: canalNotificaciones,
 	}
-	RecuperarPeticionProductos = &casosusos_sincronizacion_productos.RecuperarPeticion{InformacionEds: InformacionEdsRepository, WacherParametro: RecuperarWacherRepository}
+	RecuperarPeticionProductos = &casosusos_sincronizacion_productos.RecuperarPeticion{
+		InformacionEds:  InformacionEdsRepository,
+		WacherParametro: RecuperarWacherRepository,
+	}
 	ConsultarProductos = &casosusos_sincronizacion_productos.ConsultarProductos{
 		Cliente: ConsultarProductosRepository,
 	}
