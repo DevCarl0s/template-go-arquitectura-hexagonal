@@ -1,8 +1,8 @@
 package repositorios_infraestruture
 
 import (
-	comunes_db_clientes "genesis/pos/reportes_pos/comunes/dominio/adaptadores/clientes/db"
-	"genesis/pos/reportes_pos/dominio/entidades"
+	comunes_db_clientes "ms-sincronizador-tienda/comunes/dominio/adaptadores/clientes/db"
+	"ms-sincronizador-tienda/dominio/entidades"
 )
 
 type RecuperarWatcherParametors struct {

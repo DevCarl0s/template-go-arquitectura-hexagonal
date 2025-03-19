@@ -2,9 +2,9 @@ package cliente_infrastruc
 
 import (
 	"bytes"
-	comunes_entidades "genesis/pos/reportes_pos/comunes/dominio/entidades"
 	"io"
 	"log"
+	comunes_entidades "ms-sincronizador-tienda/comunes/dominio/entidades"
 	"net"
 	"net/http"
 	"time"
@@ -16,7 +16,7 @@ type ClienteHttp struct {
 
 func (CHttp *ClienteHttp) Enviar(metodo string, url string, mensaje *comunes_entidades.HttpRequest) (*comunes_entidades.HttpResponse, error) {
 
-	request, err := http.NewRequest(metodo, "http://"+url, bytes.NewBuffer(mensaje.Body))
+	request, err := http.NewRequest(metodo, "https://"+url, bytes.NewBuffer(mensaje.Body))
 	if err != nil {
 		log.Printf("ERROR DEL HOS %s : %v", url, err)
 		return nil, err

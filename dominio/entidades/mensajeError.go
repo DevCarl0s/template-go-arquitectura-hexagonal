@@ -3,17 +3,15 @@ package entidades
 import "time"
 
 type MensajeError struct {
-	Codigo       int32     `json:"codigoError"`
-	TipoError    string    `json:"tipoError"`
-	MensajeError string    `json:"mensajeError"`
+	Mensaje      string    `json:"mensaje"`
+	Data         any       `json:"data"`
 	FechaProceso time.Time `json:"fechaProceso"`
 }
 
-func GetMensajeError(codigo int32, tipoError string, mensaje string) *MensajeError {
+func GetMensajeError(mensaje string, data any) *MensajeError {
 	return &MensajeError{
-		Codigo:       codigo,
-		TipoError:    tipoError,
-		MensajeError: mensaje,
+		Mensaje:      mensaje,
+		Data:         data,
 		FechaProceso: time.Now(),
 	}
 }

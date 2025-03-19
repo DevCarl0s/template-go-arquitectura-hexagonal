@@ -1,6 +1,6 @@
 package mapeadores
 
-import "genesis/pos/reportes_pos/dominio/entidades"
+import "ms-sincronizador-tienda/dominio/entidades"
 
 type MapearDatosPos interface {
 	MapearA(pos []interface{}) (*entidades.PosData, error)

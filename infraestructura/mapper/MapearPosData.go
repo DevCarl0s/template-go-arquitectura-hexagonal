@@ -2,8 +2,8 @@ package mapper_infraestructura
 
 import (
 	"errors"
-	"genesis/pos/reportes_pos/dominio/entidades"
 	"log"
+	"ms-sincronizador-tienda/dominio/entidades"
 )
 
 type MapaerPosData struct {
