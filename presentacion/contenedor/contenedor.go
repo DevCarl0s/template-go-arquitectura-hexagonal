@@ -6,7 +6,7 @@ import (
 	casosusos_sincronizacion "ms-sincronizador-tienda/aplicacion/casosusos/sincronizacion"
 	casosusos_sincronizacion_productos "ms-sincronizador-tienda/aplicacion/casosusos/sincronizacion/productos"
 	"ms-sincronizador-tienda/aplicacion/servicios"
-	servicios_sincronizacion "ms-sincronizador-tienda/aplicacion/servicios/sincronizacion"
+	servicios_observadores_productos "ms-sincronizador-tienda/aplicacion/servicios/observadores/productos"
 	comunes_db_clientes "ms-sincronizador-tienda/comunes/dominio/adaptadores/clientes/db"
 	comunes_http_clientes "ms-sincronizador-tienda/comunes/dominio/adaptadores/clientes/http"
 	"ms-sincronizador-tienda/comunes/dominio/adaptadores/mapeadores"
@@ -23,15 +23,15 @@ import (
 
 // servicios
 var SupervisarNotificaciones servicios.SupervisarNotificaciones
-var SincronizacionProductos servicios_sincronizacion.Productos
 var GestorObservadores *dominio_notificacion.GestorObservadores
+var ObservadorSincronizarProductosTienda servicios_observadores_productos.ObservadorSincronizarProductosTienda
 
 // casosusos
 var GestionarNotificaciones *casosusos.GestionarNotificaciones
 
-var RecuperarPeticionProductos *casosusos_sincronizacion_productos.RecuperarPeticion
-var ConsultarProductos *casosusos_sincronizacion_productos.ConsultarProductos
-var ProcesarInformacion *casosusos_sincronizacion.ProcesarInformacion
+var RecuperarPeticionProductosCasoUso *casosusos_sincronizacion_productos.RecuperarPeticion
+var ConsultarProductosCasoUso *casosusos_sincronizacion_productos.ConsultarProductos
+var ProcesarInformacionCasoUso *casosusos_sincronizacion.ProcesarInformacion
 
 // repository
 var NotificacionRepository dominio_repositorios.INotificacion
@@ -52,7 +52,6 @@ func InicializarContenedor() error {
 
 	// Inicializar el gestor de observadores
 	GestorObservadores = dominio_notificacion.NuevoGestorObservadores()
-	GestorObservadores.RegistrarObservador()
 
 	//CLIENTES
 	ClienteDB, err := infraestructura_db_cliente.InicializarCliente(constantes.DB_CON)
@@ -76,16 +75,17 @@ func InicializarContenedor() error {
 
 	//casosusos
 	GestionarNotificaciones = &casosusos.GestionarNotificaciones{
-		CanalEventos: canalNotificaciones,
+		CanalEventos:       canalNotificaciones,
+		GestorObservadores: GestorObservadores,
 	}
-	RecuperarPeticionProductos = &casosusos_sincronizacion_productos.RecuperarPeticion{
+	RecuperarPeticionProductosCasoUso = &casosusos_sincronizacion_productos.RecuperarPeticion{
 		InformacionEds:  InformacionEdsRepository,
 		WacherParametro: RecuperarWacherRepository,
 	}
-	ConsultarProductos = &casosusos_sincronizacion_productos.ConsultarProductos{
+	ConsultarProductosCasoUso = &casosusos_sincronizacion_productos.ConsultarProductos{
 		Cliente: ConsultarProductosRepository,
 	}
-	ProcesarInformacion = &casosusos_sincronizacion.ProcesarInformacion{
+	ProcesarInformacionCasoUso = &casosusos_sincronizacion.ProcesarInformacion{
 		Procesar: ProcesarInformacionRepository,
 	}
 
@@ -94,11 +94,13 @@ func InicializarContenedor() error {
 		Notificaciones:      NotificacionRepository,
 		CanalNotificaciones: canalNotificaciones,
 	}
-	SincronizacionProductos = servicios_sincronizacion.Productos{
-		RecuperarPeticionCloud: RecuperarPeticionProductos,
-		ConsultarProductos:     ConsultarProductos,
-		ProcesarInformacion:    ProcesarInformacion,
+
+	observadorProductos := &servicios_observadores_productos.ObservadorSincronizarProductosTienda{
+		RecuperarPeticionCloud: RecuperarPeticionProductosCasoUso,
+		ConsultarProductos:     ConsultarProductosCasoUso,
+		ProcesarInformacion:    ProcesarInformacionCasoUso,
 	}
+	GestorObservadores.RegistrarObservador(observadorProductos)
 
 	return nil
 }

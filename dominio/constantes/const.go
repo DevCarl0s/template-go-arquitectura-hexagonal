@@ -14,7 +14,15 @@ const (
 	SINCRONIZACION_PRODUCTOS string = PATH_SINCRONIZACION + "/productos"
 
 	//Cloud
-	MS_CLOUD_SINCRONIZADOR string = ":10665/api/productos"
+	MS_CLOUD_SINCRONIZADOR string = ":10665/api"
+	API_PRODUCTOS_TIENDA   string = "/tienda/eds"
 
-	SINCRONIZAR_PRODUCTOS string = "productos"
+	//TIPOS SINCRONIZACION
+	PROCESAR_PRODUCTO      string = "producto"
+	PROCESAR_SUBCATEGORIA  string = "subcategoria_producto"
+	PROCESAR_UNIDAD_MEDIDA string = "unidad_medida"
+	PROCESAR_NEGOCIO       string = "negocio"
+	PROCESAR_TIPO_PRODUCTO string = "producto"
+	PROCESAR_CODIGOBARRAS  string = "codigos_barras"
+	PROCESAR_IMPUESTOS     string = "impuestos_detalles"
 )

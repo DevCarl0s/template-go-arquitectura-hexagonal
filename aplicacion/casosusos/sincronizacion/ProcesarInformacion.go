@@ -29,9 +29,13 @@ func (PI *ProcesarInformacion) Ejecutar(data any, descripcion string) error {
 		log.Println("Error al convertir data a sincronizar " + "[" + descripcion + "]")
 		return err
 	}
-	log.Println("Datos a procesar: ", string(payload))
 
-	// Llamar Procedimiento
-	PI.Procesar.Ejecutar(payload)
+	respuesta, err := PI.Procesar.Ejecutar(payload)
+	if err != nil {
+		log.Println("Error en la sincronizacion de datos")
+		return err
+	}
+
+	log.Println("Respuesta PR => ", respuesta)
 	return nil
 }

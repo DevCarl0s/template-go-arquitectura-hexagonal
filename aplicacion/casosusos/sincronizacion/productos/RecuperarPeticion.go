@@ -28,7 +28,7 @@ func (RP *RecuperarPeticion) Ejecutar() (*comunes_entidades.HttpRequest, error) 
 
 	peticion := &comunes_entidades.HttpRequest{
 		Metodo: "GET",
-		Url:    parametro.Valor + constantes.MS_CLOUD_SINCRONIZADOR + "/" + strconv.FormatInt(info.EdsId, 10),
+		Url:    parametro.Valor + constantes.MS_CLOUD_SINCRONIZADOR + constantes.API_PRODUCTOS_TIENDA + "/" + strconv.FormatInt(info.EdsId, 10),
 	}
 
 	return peticion, nil

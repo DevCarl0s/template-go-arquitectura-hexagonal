@@ -1,16 +1,16 @@
 package entidades
 
 type Notificacion struct {
-	ID               int    `json:"id"`
-	TipoNotificacion int    `json:"tipo_notificacion"`
-	Data             string `json:"data"`
-	Prioridad        bool   `json:"prioridad"`
-	Procesada        bool   `json:"procesada"`
-	FechaRecibido    string `json:"fecha_recibido"`
-	FechaCompletado  string `json:"fecha_completado"`
+	ID               int32   `json:"id"`
+	TipoNotificacion int64   `json:"tipo_notificacion"`
+	Data             *string `json:"data"`
+	Prioridad        bool    `json:"prioridad"`
+	Procesada        bool    `json:"procesada"`
+	FechaRecibido    *string `json:"fecha_recibido"`
+	FechaCompletado  *string `json:"fecha_completado"`
 }
 
-func NewNotificacion(id int, tipoNotificacion int, data string, prioridad bool, procesada bool, fechaRecibido string, fechaCompletado string) *Notificacion {
+func NewNotificacion(id int32, tipoNotificacion int64, data *string, prioridad bool, procesada bool, fechaRecibido *string, fechaCompletado *string) *Notificacion {
 	return &Notificacion{
 		ID:               id,
 		TipoNotificacion: tipoNotificacion,

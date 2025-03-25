@@ -14,16 +14,13 @@ type ConsultarProductos struct {
 
 func (CP *ConsultarProductos) Ejecutar(peticion *comunes_entidades.HttpRequest) (*entidades_sincronizacion_productos.RespuestaProductos, error) {
 	log.Println(constantes.Green + "[ConsultarProductos] Ejecutar" + constantes.Reset)
-	// respuesta, _ := CP.Cliente.Consultar(peticion)
+	respuesta, err := CP.Cliente.Consultar(peticion)
 
-	// if err != nil {
-	// 	log.Println(constantes.Red + "Host " + peticion.Url + "sin respuesta")
-	// 	log.Println("Error: " + err.Error() + constantes.Reset)
-	// 	return nil, err
-	// }
-
-	respuesta := &entidades_sincronizacion_productos.RespuestaProductos{
-		Id: 1,
+	if err != nil {
+		log.Println(constantes.Red + "Host " + peticion.Url + "sin respuesta")
+		log.Println("Error: " + err.Error() + constantes.Reset)
+		return nil, err
 	}
+
 	return respuesta, nil
 }

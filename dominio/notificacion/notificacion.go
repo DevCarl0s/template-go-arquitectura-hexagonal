@@ -3,12 +3,12 @@ package dominio_notificacion
 type TipoNotificacion int
 
 const (
-	TipoProductos TipoNotificacion = 1
-	TipoOtro      TipoNotificacion = 8
+	TIPO_PRODUCTOS TipoNotificacion = 1
+	TipoOtro       TipoNotificacion = 8
 )
 
 type Notificacion struct {
-	ID   int
+	ID   int32
 	Tipo TipoNotificacion
 	Data interface{}
 }
