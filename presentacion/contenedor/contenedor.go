@@ -77,6 +77,7 @@ func InicializarContenedor() error {
 	GestionarNotificaciones = &casosusos.GestionarNotificaciones{
 		CanalEventos:       canalNotificaciones,
 		GestorObservadores: GestorObservadores,
+		Notificaciones:     NotificacionRepository,
 	}
 	RecuperarPeticionProductosCasoUso = &casosusos_sincronizacion_productos.RecuperarPeticion{
 		InformacionEds:  InformacionEdsRepository,

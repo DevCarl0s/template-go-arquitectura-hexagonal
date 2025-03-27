@@ -22,7 +22,7 @@ const (
 	PROCESAR_SUBCATEGORIA  string = "subcategoria_producto"
 	PROCESAR_UNIDAD_MEDIDA string = "unidad_medida"
 	PROCESAR_NEGOCIO       string = "negocio"
-	PROCESAR_TIPO_PRODUCTO string = "producto"
+	PROCESAR_TIPO_PRODUCTO string = "tipo_producto"
 	PROCESAR_CODIGOBARRAS  string = "codigos_barras"
 	PROCESAR_IMPUESTOS     string = "impuestos_detalles"
 )

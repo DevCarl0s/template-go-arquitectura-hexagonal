@@ -5,12 +5,14 @@ import (
 	"ms-sincronizador-tienda/dominio/constantes"
 	"ms-sincronizador-tienda/dominio/entidades"
 	dominio_notificacion "ms-sincronizador-tienda/dominio/notificacion"
+	dominio_repositorios "ms-sincronizador-tienda/dominio/repositorios/db"
 	"time"
 )
 
 type GestionarNotificaciones struct {
 	CanalEventos       chan *entidades.Notificacion
 	GestorObservadores *dominio_notificacion.GestorObservadores
+	Notificaciones     dominio_repositorios.INotificacion
 }
 
 func (GN *GestionarNotificaciones) Observar() {
@@ -34,10 +36,12 @@ func (GN *GestionarNotificaciones) Observar() {
 
 		if err := GN.GestorObservadores.NotificarObservadores(notificacionObservador); err != nil {
 			log.Printf("Error al procesar notificación %d: %v", notificacion.ID, err)
+			GN.Notificaciones.MarcarProcesada(notificacion.ID)
 			continue
 		}
 
 		log.Printf("Notificación %d procesada exitosamente", notificacion.ID)
+		GN.Notificaciones.MarcarProcesada(notificacion.ID)
 
 	}
 

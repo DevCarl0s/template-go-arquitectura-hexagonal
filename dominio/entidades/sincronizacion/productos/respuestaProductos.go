@@ -1,23 +1,23 @@
 package entidades_sincronizacion_productos
 
 type Producto struct {
-	ID                     int     `json:"id"`
-	Descripcion            string  `json:"descripcion"`
-	Estado                 string  `json:"estado"`
-	Atributos              any     `json:"atributos"`
-	Precio                 float64 `json:"precio"`
-	PrecioMinimo           float64 `json:"precio_minimo"`
-	PrecioMaximo           float64 `json:"precio_maximo"`
-	ImpuestoOperacion      string  `json:"impuesto_operacion"`
-	FechaCreacion          string  `json:"fecha_creacion"`
-	FechaModificacion      string  `json:"fecha_modificacion"`
-	UsuarioCreacion        string  `json:"usuario_creacion"`
-	UsuarioModificacion    string  `json:"usuario_modificacion"`
-	SKU                    string  `json:"sku"`
-	TipoProductoID         int     `json:"tipo_producto_id"`
-	SubcategoriaProductoID int     `json:"subcategoria_producto_id"`
-	TipoNegocioID          int     `json:"id_tipo_negocio"`
-	EmpresaID              int     `json:"empresa_id"`
+	ID                int     `json:"id"`
+	Descripcion       string  `json:"descripcion"`
+	Estado            string  `json:"estado"`
+	Atributos         any     `json:"atributos"`
+	Precio            float64 `json:"precio"`
+	PrecioMinimo      float64 `json:"precio_minimo"`
+	PrecioMaximo      float64 `json:"precio_maximo"`
+	ImpuestoOperacion string  `json:"impuesto_operacion"`
+	// FechaCreacion          *string `json:"fecha_creacion"`
+	// FechaModificacion      *string `json:"fecha_modificacion"`
+	// UsuarioCreacion        *string `json:"usuario_creacion"`
+	// UsuarioModificacion    *string `json:"usuario_modificacion"`
+	SKU                    string `json:"sku"`
+	TipoProductoID         int    `json:"tipo_producto_id"`
+	SubcategoriaProductoID int    `json:"subcategoria_producto_id"`
+	TipoNegocioID          int    `json:"id_tipo_negocio"`
+	EmpresaID              int    `json:"empresa_id"`
 }
 
 type Empresa struct {
@@ -75,7 +75,7 @@ type ImpuestosDetalles struct {
 type TipoProducto struct {
 	Id          int    `json:"id"`
 	Descripcion string `json:"descripcion"`
-	EntidadesId int    `json:"entidades_id"`
+	Estado      string `json:"estado"`
 }
 
 type ProductosEds struct {

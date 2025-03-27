@@ -32,7 +32,7 @@ func (PI *ProcesarInformacion) Ejecutar(data any, descripcion string) error {
 
 	respuesta, err := PI.Procesar.Ejecutar(payload)
 	if err != nil {
-		log.Println("Error en la sincronizacion de datos")
+		log.Println("Error en la sincronizacion de datos", err)
 		return err
 	}
 

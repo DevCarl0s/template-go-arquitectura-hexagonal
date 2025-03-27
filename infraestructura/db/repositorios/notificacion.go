@@ -40,13 +40,13 @@ func (r *Notificacion) ObtenerPendientes() ([]*entidades.Notificacion, error) {
 	return notificaciones, nil
 }
 
-func (r *Notificacion) MarcarProcesada(id int) error {
+func (r *Notificacion) MarcarProcesada(id int32) error {
 	query := `
 		UPDATE sincronizacion.sincronizacion_tienda 
-		SET procesada = true
-		WHERE id = ?
+		SET procesada = true , fecha_completado = NOW()
+		WHERE id = $1
 	`
 
-	_, err := r.Cliente.Select(query, []any{id})
+	_, err := r.Cliente.Select(query, []any{int(id)})
 	return err
 }
