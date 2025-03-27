@@ -2,13 +2,13 @@ package repositorios_infraestruture
 
 import (
 	"log"
-	comunes_db_clientes "ms-sincronizador-tienda/comunes/dominio/adaptadores/clientes/db"
 	entidades_sincronizacion "ms-sincronizador-tienda/dominio/entidades/sincronizacion"
+	dominio_repositorios "ms-sincronizador-tienda/dominio/repositorios/db"
 	"strconv"
 )
 
 type ProcesarInformacion struct {
-	Cliente comunes_db_clientes.IClienteDB
+	Cliente dominio_repositorios.IClienteDB
 }
 
 func (PI *ProcesarInformacion) Ejecutar(data []byte) (*entidades_sincronizacion.RespuestaSincronizacion, error) {

@@ -2,8 +2,8 @@ package casosusos_sincronizacion_productos
 
 import (
 	"log"
-	comunes_entidades "ms-sincronizador-tienda/comunes/dominio/entidades"
 	"ms-sincronizador-tienda/dominio/constantes"
+	"ms-sincronizador-tienda/dominio/entidades"
 	dominio_repositorios "ms-sincronizador-tienda/dominio/repositorios/db"
 	"strconv"
 )
@@ -13,7 +13,7 @@ type RecuperarPeticion struct {
 	WacherParametro dominio_repositorios.IRecuperarWacher
 }
 
-func (RP *RecuperarPeticion) Ejecutar() (*comunes_entidades.HttpRequest, error) {
+func (RP *RecuperarPeticion) Ejecutar() (*entidades.HttpRequest, error) {
 	info, err := RP.InformacionEds.Ejecutar()
 	if err != nil {
 		log.Println(constantes.Red + "No se encontro informacion eds" + constantes.Reset)
@@ -26,7 +26,7 @@ func (RP *RecuperarPeticion) Ejecutar() (*comunes_entidades.HttpRequest, error) 
 		return nil, err
 	}
 
-	peticion := &comunes_entidades.HttpRequest{
+	peticion := &entidades.HttpRequest{
 		Metodo: "GET",
 		Url:    parametro.Valor + constantes.MS_CLOUD_SINCRONIZADOR + constantes.API_PRODUCTOS_TIENDA + "/" + strconv.FormatInt(info.EdsId, 10),
 	}

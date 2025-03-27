@@ -3,8 +3,8 @@ package dominio_notificacion
 type TipoNotificacion int
 
 const (
-	TIPO_PRODUCTOS TipoNotificacion = 1
-	TipoOtro       TipoNotificacion = 8
+	TIPO_PRODUCTOS    TipoNotificacion = 1
+	TIPO_CONSECUTIVOS TipoNotificacion = 2
 )
 
 type Notificacion struct {

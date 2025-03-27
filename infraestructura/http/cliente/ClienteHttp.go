@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"io"
 	"log"
-	comunes_entidades "ms-sincronizador-tienda/comunes/dominio/entidades"
+	"ms-sincronizador-tienda/dominio/entidades"
 	"net"
 	"net/http"
 	"time"
@@ -14,7 +14,7 @@ type ClienteHttp struct {
 	cliente *http.Client
 }
 
-func (CHttp *ClienteHttp) Enviar(metodo string, url string, mensaje *comunes_entidades.HttpRequest) (*comunes_entidades.HttpResponse, error) {
+func (CHttp *ClienteHttp) Enviar(metodo string, url string, mensaje *entidades.HttpRequest) (*entidades.HttpResponse, error) {
 
 	request, err := http.NewRequest(metodo, "https://"+url, bytes.NewBuffer(mensaje.Body))
 	if err != nil {
@@ -36,7 +36,7 @@ func (CHttp *ClienteHttp) Enviar(metodo string, url string, mensaje *comunes_ent
 	if err != nil {
 		return nil, err
 	}
-	responesDominio := &comunes_entidades.HttpResponse{
+	responesDominio := &entidades.HttpResponse{
 		StatusCode: response.StatusCode,
 		Body:       bodyBytes,
 		Status:     response.Status,

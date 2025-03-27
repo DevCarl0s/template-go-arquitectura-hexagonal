@@ -4,19 +4,19 @@ import (
 	"encoding/json"
 	"errors"
 	"log"
-	comunes_http_clientes "ms-sincronizador-tienda/comunes/dominio/adaptadores/clientes/http"
-	comunes_entidades "ms-sincronizador-tienda/comunes/dominio/entidades"
 	"ms-sincronizador-tienda/dominio/constantes"
+	"ms-sincronizador-tienda/dominio/entidades"
 	entidades_sincronizacion_productos "ms-sincronizador-tienda/dominio/entidades/sincronizacion/productos"
+	dominio_repositorios_http "ms-sincronizador-tienda/dominio/repositorios/http"
 	"net/http"
 	"strconv"
 )
 
 type ConsultarProductos struct {
-	Client comunes_http_clientes.IClienteHttp
+	Client dominio_repositorios_http.IClienteHttp
 }
 
-func (CP *ConsultarProductos) Consultar(peticion *comunes_entidades.HttpRequest) (*entidades_sincronizacion_productos.RespuestaProductos, error) {
+func (CP *ConsultarProductos) Consultar(peticion *entidades.HttpRequest) (*entidades_sincronizacion_productos.RespuestaProductos, error) {
 	respuesta, err := CP.Client.Enviar(peticion.Metodo, peticion.Url, peticion)
 	if err != nil {
 		log.Println(constantes.Red + err.Error() + constantes.Reset)

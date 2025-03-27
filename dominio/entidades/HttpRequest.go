@@ -1,4 +1,4 @@
-package comunes_entidades
+package entidades
 
 type HttpRequest struct {
 	Body   []byte

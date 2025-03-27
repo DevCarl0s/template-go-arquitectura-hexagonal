@@ -1,12 +1,12 @@
 package repositorios_infraestruture
 
 import (
-	comunes_db_clientes "ms-sincronizador-tienda/comunes/dominio/adaptadores/clientes/db"
 	"ms-sincronizador-tienda/dominio/entidades"
+	dominio_repositorios "ms-sincronizador-tienda/dominio/repositorios/db"
 )
 
 type RecuperarInformacionEds struct {
-	Cliente comunes_db_clientes.IClienteDB
+	Cliente dominio_repositorios.IClienteDB
 }
 
 func (RIE *RecuperarInformacionEds) Ejecutar() (*entidades.ParametrosEds, error) {

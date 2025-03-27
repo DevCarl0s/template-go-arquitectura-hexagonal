@@ -7,9 +7,6 @@ import (
 	casosusos_sincronizacion_productos "ms-sincronizador-tienda/aplicacion/casosusos/sincronizacion/productos"
 	"ms-sincronizador-tienda/aplicacion/servicios"
 	servicios_observadores_productos "ms-sincronizador-tienda/aplicacion/servicios/observadores/productos"
-	comunes_db_clientes "ms-sincronizador-tienda/comunes/dominio/adaptadores/clientes/db"
-	comunes_http_clientes "ms-sincronizador-tienda/comunes/dominio/adaptadores/clientes/http"
-	"ms-sincronizador-tienda/comunes/dominio/adaptadores/mapeadores"
 	"ms-sincronizador-tienda/dominio/constantes"
 	"ms-sincronizador-tienda/dominio/entidades"
 	dominio_notificacion "ms-sincronizador-tienda/dominio/notificacion"
@@ -41,11 +38,10 @@ var InformacionEdsRepository dominio_repositorios.IInformacionEds
 var ProcesarInformacionRepository dominio_repositorios.IProcesarInformacion
 
 // Clientes
-var ClienteDB comunes_db_clientes.IClienteDB
-var ClienteHttp comunes_http_clientes.IClienteHttp
+var ClienteDB dominio_repositorios.IClienteDB
+var ClienteHttp dominio_repositorios_http.IClienteHttp
 
 // MAPPER
-var MapPosDatos mapeadores.MapearDatosPos
 
 func InicializarContenedor() error {
 	canalNotificaciones := make(chan *entidades.Notificacion)
