@@ -42,14 +42,6 @@ type UnidadMedida struct {
 	Alias       string  `json:"alias"`
 }
 
-type SubcategoriaProducto struct {
-	ID             int    `json:"subcategoria_producto_id"`
-	Descripcion    string `json:"subcategoria_producto_descripcion"`
-	Estado         int    `json:"subcategoria_producto_estado"`
-	TiempoCreacion string `json:"subcategoria_producto_tiempo_creacion"`
-	CategoriaID    int    `json:"subcategoria_producto_categoria_id"`
-}
-
 type CodigosBarras struct {
 	CodigoBarrasID int    `json:"codigo_barras_id"`
 	ProductoID     int    `json:"producto_id"`
@@ -101,6 +93,9 @@ type ProductosEds struct {
 	ImpuestosDetalles    []ImpuestosDetalles  `json:"impuestos_detalles"`
 	TipoProducto         []TipoProducto       `json:"tipo_producto"`
 	CategoriaTipoNegocio CategoriaTipoNegocio `json:"categoria_tipo_negocio"`
+}
+
+type SubcategoriaProducto struct {
 }
 
 type RespuestaProductos struct {
