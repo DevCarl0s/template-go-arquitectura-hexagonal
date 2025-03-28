@@ -4,8 +4,10 @@ import (
 	"log"
 	"ms-sincronizador-tienda/aplicacion/casosusos"
 	casosusos_sincronizacion "ms-sincronizador-tienda/aplicacion/casosusos/sincronizacion"
+	casosusos_sincronizacion_consecutivos "ms-sincronizador-tienda/aplicacion/casosusos/sincronizacion/consecutivos"
 	casosusos_sincronizacion_productos "ms-sincronizador-tienda/aplicacion/casosusos/sincronizacion/productos"
 	"ms-sincronizador-tienda/aplicacion/servicios"
+	servicios_observadores_consecutivos "ms-sincronizador-tienda/aplicacion/servicios/observadores/consecutivos"
 	servicios_observadores_productos "ms-sincronizador-tienda/aplicacion/servicios/observadores/productos"
 	"ms-sincronizador-tienda/dominio/constantes"
 	"ms-sincronizador-tienda/dominio/entidades"
@@ -21,21 +23,25 @@ import (
 // servicios
 var SupervisarNotificaciones servicios.SupervisarNotificaciones
 var GestorObservadores *dominio_notificacion.GestorObservadores
-var ObservadorSincronizarProductosTienda servicios_observadores_productos.ObservadorSincronizarProductosTienda
 
 // casosusos
 var GestionarNotificaciones *casosusos.GestionarNotificaciones
+var ProcesarInformacionCasoUso *casosusos_sincronizacion.ProcesarInformacion
 
 var RecuperarPeticionProductosCasoUso *casosusos_sincronizacion_productos.RecuperarPeticion
 var ConsultarProductosCasoUso *casosusos_sincronizacion_productos.ConsultarProductos
-var ProcesarInformacionCasoUso *casosusos_sincronizacion.ProcesarInformacion
+
+var RecuperarPeticionConsecutivosCasoUso *casosusos_sincronizacion_consecutivos.RecuperarPeticion
+var ConsultarConsecutivosCasoUso *casosusos_sincronizacion_consecutivos.ConsultarConsecutivos
 
 // repository
-var NotificacionRepository dominio_repositorios.INotificacion
-var ConsultarProductosRepository dominio_repositorios_http.IConsultarProductos
-var RecuperarWacherRepository dominio_repositorios.IRecuperarWacher
-var InformacionEdsRepository dominio_repositorios.IInformacionEds
 var ProcesarInformacionRepository dominio_repositorios.IProcesarInformacion
+var NotificacionRepository dominio_repositorios.INotificacion
+var InformacionEdsRepository dominio_repositorios.IInformacionEds
+var RecuperarWacherRepository dominio_repositorios.IRecuperarWacher
+
+var ConsultarProductosRepository dominio_repositorios_http.IConsultarProductos
+var ConsultarConsecutivosRepository dominio_repositorios_http.IConsultarConsecutivos
 
 // Clientes
 var ClienteDB dominio_repositorios.IClienteDB
@@ -67,7 +73,9 @@ func InicializarContenedor() error {
 	RecuperarWacherRepository = &repositorios_infraestruture.RecuperarWatcherParametors{Cliente: ClienteDB}
 
 	ProcesarInformacionRepository = &repositorios_infraestruture.ProcesarInformacion{Cliente: ClienteDB}
+
 	ConsultarProductosRepository = &repositorios_infraestruture_http.ConsultarProductos{Client: ClienteHttp}
+	ConsultarConsecutivosRepository = &repositorios_infraestruture_http.ConsultarConsecutivos{Client: ClienteHttp}
 
 	//casosusos
 	GestionarNotificaciones = &casosusos.GestionarNotificaciones{
@@ -75,6 +83,10 @@ func InicializarContenedor() error {
 		GestorObservadores: GestorObservadores,
 		Notificaciones:     NotificacionRepository,
 	}
+	ProcesarInformacionCasoUso = &casosusos_sincronizacion.ProcesarInformacion{
+		Procesar: ProcesarInformacionRepository,
+	}
+
 	RecuperarPeticionProductosCasoUso = &casosusos_sincronizacion_productos.RecuperarPeticion{
 		InformacionEds:  InformacionEdsRepository,
 		WacherParametro: RecuperarWacherRepository,
@@ -82,8 +94,13 @@ func InicializarContenedor() error {
 	ConsultarProductosCasoUso = &casosusos_sincronizacion_productos.ConsultarProductos{
 		Cliente: ConsultarProductosRepository,
 	}
-	ProcesarInformacionCasoUso = &casosusos_sincronizacion.ProcesarInformacion{
-		Procesar: ProcesarInformacionRepository,
+
+	RecuperarPeticionConsecutivosCasoUso = &casosusos_sincronizacion_consecutivos.RecuperarPeticion{
+		InformacionEds:  InformacionEdsRepository,
+		WacherParametro: RecuperarWacherRepository,
+	}
+	ConsultarConsecutivosCasoUso = &casosusos_sincronizacion_consecutivos.ConsultarConsecutivos{
+		Cliente: ConsultarConsecutivosRepository,
 	}
 
 	//Servicios
@@ -97,7 +114,13 @@ func InicializarContenedor() error {
 		ConsultarProductos:     ConsultarProductosCasoUso,
 		ProcesarInformacion:    ProcesarInformacionCasoUso,
 	}
+	observadorConsecutivos := &servicios_observadores_consecutivos.ObservadorSincronizarConsecutivosTienda{
+		RecuperarPeticionCloud: RecuperarPeticionConsecutivosCasoUso,
+		ConsultarConsecutivos:  ConsultarConsecutivosCasoUso,
+		ProcesarInformacion:    ProcesarInformacionCasoUso,
+	}
 	GestorObservadores.RegistrarObservador(observadorProductos)
+	GestorObservadores.RegistrarObservador(observadorConsecutivos)
 
 	return nil
 }

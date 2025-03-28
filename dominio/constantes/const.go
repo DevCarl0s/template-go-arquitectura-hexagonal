@@ -16,6 +16,7 @@ const (
 	//Cloud
 	MS_CLOUD_SINCRONIZADOR string = ":10665/api"
 	API_PRODUCTOS_TIENDA   string = "/tienda/eds"
+	API_CONSECUTIVO_TIENDA string = "/tienda/consecutivos"
 
 	//TIPOS SINCRONIZACION
 	PROCESAR_PRODUCTO      string = "producto"
@@ -25,4 +26,5 @@ const (
 	PROCESAR_TIPO_PRODUCTO string = "tipo_producto"
 	PROCESAR_CODIGOBARRAS  string = "codigos_barras"
 	PROCESAR_IMPUESTOS     string = "impuestos_detalles"
+	PROCESAR_RESOLUCIONES  string = "resoluciones"
 )
