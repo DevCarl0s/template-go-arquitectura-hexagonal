@@ -31,6 +31,14 @@ func (OP *ObservadorSincronizarProductosTienda) ProcesarNotificacion(notificacio
 
 	if len(productos.Datos) > 0 {
 		for _, dato := range productos.Datos {
+			err = OP.ProcesarInformacion.Ejecutar(dato.CategoriaProducto, constantes.PROCESAR_CATEGORIA)
+			if err != nil {
+				return err
+			}
+			err = OP.ProcesarInformacion.Ejecutar(dato.CategoriaTipoNegocio, constantes.PROCESAR_CATEGORIA_TIPO_NEGOCIO)
+			if err != nil {
+				return err
+			}
 			err = OP.ProcesarInformacion.Ejecutar(dato.SubcategoriaProducto, constantes.PROCESAR_SUBCATEGORIA)
 			if err != nil {
 				return err
