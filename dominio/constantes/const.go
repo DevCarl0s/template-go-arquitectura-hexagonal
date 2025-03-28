@@ -27,4 +27,5 @@ const (
 	PROCESAR_CODIGOBARRAS  string = "codigos_barras"
 	PROCESAR_IMPUESTOS     string = "impuestos_detalles"
 	PROCESAR_RESOLUCIONES  string = "resoluciones"
+	PROCESAR_CATEGORIAS    string = "categorias"
 )

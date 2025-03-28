@@ -72,6 +72,17 @@ type ImpuestosDetalles struct {
 	ClasificacionEstadoID    int     `json:"clasificacion_impuesto_estado"`
 }
 
+type CategoriaProducto struct {
+	Id          int `json:"id"`
+	Descripcion int `json:"descripcion"`
+}
+
+type CategoriaTipoNegocio struct {
+	Id            int `json:""`
+	CategoriaId   int `json:"categoria_id"`
+	TipoNegocioId int `json:"tipo_negocio_id"`
+}
+
 type TipoProducto struct {
 	Id          int    `json:"id"`
 	Descripcion string `json:"descripcion"`
@@ -85,9 +96,11 @@ type ProductosEds struct {
 	UnidadMedidaCompra   UnidadMedida         `json:"unidad_medida_compra"`
 	UnidadMedidaVenta    UnidadMedida         `json:"unidad_medida_venta"`
 	SubcategoriaProducto SubcategoriaProducto `json:"subcategoria_producto"`
+	CategoriaProducto    CategoriaProducto    `json:"categoria_producto"`
 	CodigosBarras        []CodigosBarras      `json:"codigos_barras"`
 	ImpuestosDetalles    []ImpuestosDetalles  `json:"impuestos_detalles"`
 	TipoProducto         []TipoProducto       `json:"tipo_producto"`
+	CategoriaTipoNegocio CategoriaTipoNegocio `json:"categoria_tipo_negocio"`
 }
 
 type RespuestaProductos struct {
