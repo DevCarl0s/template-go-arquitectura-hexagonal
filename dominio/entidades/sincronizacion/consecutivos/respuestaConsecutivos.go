@@ -14,11 +14,11 @@ type Consecutivos struct {
 	FechaInicio        string `json:"fecha_inicio"`
 	FechaFin           string `json:"fecha_fin"`
 	ConsecutivoInicial int64  `json:"consecutivo_inicial"`
-	ConsecutivoActual  *int64 `json:"consecutivo_actual"`
-	ConsecutivoFinal   *int64 `json:"consecutivo_final"`
+	ConsecutivoActual  int64  `json:"consecutivo_actual"`
+	ConsecutivoFinal   int64  `json:"consecutivo_final"`
 	Resolucion         string `json:"resolucion"`
 	Observaciones      string `json:"observaciones"`
-	EquiposID          *int64 `json:"equipos_id"`
+	EquiposID          int64  `json:"equipos_id"`
 	CsAtributos        *JSON  `json:"cs_atributos"`
 	Origen             string `json:"origen"`
 	ClaveTecnica       string `json:"clave_tecnica"`

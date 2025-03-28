@@ -24,7 +24,7 @@ func (CP *ConsultarConsecutivos) Consultar(peticion *entidades.HttpRequest) (*en
 	}
 
 	if respuesta.StatusCode != http.StatusOK {
-		mensaje := "Error al consultar productos: " + strconv.Itoa(respuesta.StatusCode)
+		mensaje := "Error al consultar consecutivos: " + strconv.Itoa(respuesta.StatusCode)
 		return nil, errors.New(mensaje)
 	}
 

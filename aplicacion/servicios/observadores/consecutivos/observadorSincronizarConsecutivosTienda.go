@@ -30,7 +30,10 @@ func (OSCT *ObservadorSincronizarConsecutivosTienda) ProcesarNotificacion(notifi
 		return err
 	}
 
-	OSCT.ProcesarInformacion.Ejecutar(consecutivos.Datos, constantes.PROCESAR_RESOLUCIONES)
+	err = OSCT.ProcesarInformacion.Ejecutar(consecutivos.Datos, constantes.PROCESAR_RESOLUCIONES)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

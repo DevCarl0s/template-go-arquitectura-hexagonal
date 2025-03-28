@@ -2,9 +2,11 @@ package casosusos_sincronizacion
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"ms-sincronizador-tienda/dominio/constantes"
 	dominio_repositorios "ms-sincronizador-tienda/dominio/repositorios/db"
+	"net/http"
 )
 
 type ProcesarInformacion struct {
@@ -36,6 +38,9 @@ func (PI *ProcesarInformacion) Ejecutar(data any, descripcion string) error {
 		return err
 	}
 
-	log.Println("Respuesta PR => ", respuesta)
+	if respuesta.CodigoRespuesta != http.StatusCreated {
+		log.Println("Error :", respuesta.Mensaje)
+		return errors.New("Fallo en procedimiento de sync")
+	}
 	return nil
 }

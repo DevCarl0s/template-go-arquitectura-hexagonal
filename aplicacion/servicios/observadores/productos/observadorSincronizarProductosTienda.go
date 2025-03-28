@@ -31,14 +31,38 @@ func (OP *ObservadorSincronizarProductosTienda) ProcesarNotificacion(notificacio
 
 	if len(productos.Datos) > 0 {
 		for _, dato := range productos.Datos {
-			OP.ProcesarInformacion.Ejecutar(dato.SubcategoriaProducto, constantes.PROCESAR_SUBCATEGORIA)
-			OP.ProcesarInformacion.Ejecutar(dato.UnidadMedidaCompra, constantes.PROCESAR_UNIDAD_MEDIDA)
-			OP.ProcesarInformacion.Ejecutar(dato.UnidadMedidaVenta, constantes.PROCESAR_UNIDAD_MEDIDA)
-			OP.ProcesarInformacion.Ejecutar(dato.Negocio, constantes.PROCESAR_NEGOCIO)
-			OP.ProcesarInformacion.Ejecutar(dato.TipoProducto, constantes.PROCESAR_TIPO_PRODUCTO)
-			OP.ProcesarInformacion.Ejecutar(dato.Producto, constantes.PROCESAR_PRODUCTO)
-			OP.ProcesarInformacion.Ejecutar(dato.CodigosBarras, constantes.PROCESAR_CODIGOBARRAS)
-			OP.ProcesarInformacion.Ejecutar(dato.ImpuestosDetalles, constantes.PROCESAR_IMPUESTOS)
+			err = OP.ProcesarInformacion.Ejecutar(dato.SubcategoriaProducto, constantes.PROCESAR_SUBCATEGORIA)
+			if err != nil {
+				return err
+			}
+			err = OP.ProcesarInformacion.Ejecutar(dato.UnidadMedidaCompra, constantes.PROCESAR_UNIDAD_MEDIDA)
+			if err != nil {
+				return err
+			}
+			err = OP.ProcesarInformacion.Ejecutar(dato.UnidadMedidaVenta, constantes.PROCESAR_UNIDAD_MEDIDA)
+			if err != nil {
+				return err
+			}
+			err = OP.ProcesarInformacion.Ejecutar(dato.Negocio, constantes.PROCESAR_NEGOCIO)
+			if err != nil {
+				return err
+			}
+			err = OP.ProcesarInformacion.Ejecutar(dato.TipoProducto, constantes.PROCESAR_TIPO_PRODUCTO)
+			if err != nil {
+				return err
+			}
+			err = OP.ProcesarInformacion.Ejecutar(dato.Producto, constantes.PROCESAR_PRODUCTO)
+			if err != nil {
+				return err
+			}
+			err = OP.ProcesarInformacion.Ejecutar(dato.CodigosBarras, constantes.PROCESAR_CODIGOBARRAS)
+			if err != nil {
+				return err
+			}
+			err = OP.ProcesarInformacion.Ejecutar(dato.ImpuestosDetalles, constantes.PROCESAR_IMPUESTOS)
+			if err != nil {
+				return err
+			}
 		}
 	}
 
