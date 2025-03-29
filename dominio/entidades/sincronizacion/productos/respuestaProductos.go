@@ -56,6 +56,8 @@ type ImpuestosDetalles struct {
 	Descripcion              string  `json:"impuestos_descripcion"`
 	PorcentajeValor          string  `json:"impuestos_porcentaje_valor"`
 	Valor                    float64 `json:"impuestos_valor"`
+	ImpuestosEstado          string  `json:"impuestos_estado"`
+	ImpuestosEmpresasId      string  `json:"impuestos_empresas_id"`
 	TipoImpuestoID           int     `json:"tipo_impuesto_id"`
 	TipoImpuestoDescripcion  string  `json:"tipo_impuesto_descripcion"`
 	EstadoID                 int     `json:"tipo_impuesto_estado"`
