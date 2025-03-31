@@ -16,6 +16,7 @@ type SupervisarNotificaciones struct {
 func (SN *SupervisarNotificaciones) Iniciar() {
 	for {
 		notificaciones, err := SN.Notificaciones.ObtenerPendientes()
+
 		if err != nil {
 			log.Println(constantes.Red+"Error al consultar procesos", err.Error()+constantes.Reset)
 		} else {
@@ -28,6 +29,6 @@ func (SN *SupervisarNotificaciones) Iniciar() {
 				SN.CanalNotificaciones <- notificacion
 			}
 		}
-		time.Sleep(time.Second * 5)
+		time.Sleep(time.Second * 1)
 	}
 }

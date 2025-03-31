@@ -37,7 +37,7 @@ func (GN *GestionarNotificaciones) Observar() {
 		if err := GN.GestorObservadores.NotificarObservadores(notificacionObservador); err != nil {
 			log.Printf("Error al procesar notificación %d: %v", notificacion.ID, err)
 			GN.Notificaciones.MarcarProcesada(notificacion.ID)
-			continue
+			return
 		}
 
 		log.Printf("Notificación %d procesada exitosamente", notificacion.ID)

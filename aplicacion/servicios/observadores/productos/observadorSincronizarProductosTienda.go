@@ -7,6 +7,7 @@ import (
 	casosusos_sincronizacion_productos "ms-sincronizador-tienda/aplicacion/casosusos/sincronizacion/productos"
 	"ms-sincronizador-tienda/dominio/constantes"
 	dominio_notificacion "ms-sincronizador-tienda/dominio/notificacion"
+	"strconv"
 )
 
 type ObservadorSincronizarProductosTienda struct {
@@ -29,49 +30,62 @@ func (OP *ObservadorSincronizarProductosTienda) ProcesarNotificacion(notificacio
 		return err
 	}
 
+	log.Println(constantes.Yellow+"Número de productos a procesar: ", strconv.Itoa(len(productos.Datos))+constantes.Reset)
 	if len(productos.Datos) > 0 {
 		for _, dato := range productos.Datos {
-			err = OP.ProcesarInformacion.Ejecutar(dato.CategoriaProducto, constantes.PROCESAR_CATEGORIA)
-			if err != nil {
-				return err
-			}
-			err = OP.ProcesarInformacion.Ejecutar(dato.CategoriaTipoNegocio, constantes.PROCESAR_CATEGORIA_TIPO_NEGOCIO)
-			if err != nil {
-				return err
-			}
-			err = OP.ProcesarInformacion.Ejecutar(dato.SubcategoriaProducto, constantes.PROCESAR_SUBCATEGORIA)
-			if err != nil {
-				return err
-			}
-			err = OP.ProcesarInformacion.Ejecutar(dato.UnidadMedidaCompra, constantes.PROCESAR_UNIDAD_MEDIDA)
-			if err != nil {
-				return err
-			}
-			err = OP.ProcesarInformacion.Ejecutar(dato.UnidadMedidaVenta, constantes.PROCESAR_UNIDAD_MEDIDA)
-			if err != nil {
-				return err
-			}
-			err = OP.ProcesarInformacion.Ejecutar(dato.Negocio, constantes.PROCESAR_NEGOCIO)
-			if err != nil {
-				return err
-			}
-			err = OP.ProcesarInformacion.Ejecutar(dato.TipoProducto, constantes.PROCESAR_TIPO_PRODUCTO)
-			if err != nil {
-				return err
-			}
-			err = OP.ProcesarInformacion.Ejecutar(dato.Producto, constantes.PROCESAR_PRODUCTO)
-			if err != nil {
-				return err
-			}
-			err = OP.ProcesarInformacion.Ejecutar(dato.CodigosBarras, constantes.PROCESAR_CODIGOBARRAS)
-			if err != nil {
-				return err
-			}
-			err = OP.ProcesarInformacion.Ejecutar(dato.ImpuestosDetalles, constantes.PROCESAR_IMPUESTOS)
-			if err != nil {
-				return err
-			}
-
+			log.Println(constantes.Green+"Procesando producto => ", dato.Producto.Descripcion+constantes.Reset)
+			// err = OP.ProcesarInformacion.Ejecutar(dato.CategoriaProducto, constantes.PROCESAR_CATEGORIA)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.CategoriaTipoNegocio, constantes.PROCESAR_CATEGORIA_TIPO_NEGOCIO)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.SubcategoriaProducto, constantes.PROCESAR_SUBCATEGORIA)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.UnidadMedidaCompra, constantes.PROCESAR_UNIDAD_MEDIDA)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.UnidadMedidaVenta, constantes.PROCESAR_UNIDAD_MEDIDA)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.Negocio, constantes.PROCESAR_NEGOCIO)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.TipoProducto, constantes.PROCESAR_TIPO_PRODUCTO)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.Producto, constantes.PROCESAR_PRODUCTO)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.CodigosBarras, constantes.PROCESAR_CODIGOBARRAS)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.ImpuestosDetalles, constantes.PROCESAR_IMPUESTOS_CLASIFICACION)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.ImpuestosDetalles, constantes.PROCESAR_IMPUESTOS_TIPOS)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.ImpuestosDetalles, constantes.PROCESAR_IMPUESTOS)
+			// if err != nil {
+			// 	return err
+			// }
+			// err = OP.ProcesarInformacion.Ejecutar(dato.ImpuestosDetalles, constantes.PROCESAR_PRODUCTOS_IMPUESTOS)
+			// if err != nil {
+			// 	return err
+			// }
 		}
 	}
 

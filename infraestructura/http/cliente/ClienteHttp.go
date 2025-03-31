@@ -43,7 +43,7 @@ func (CHttp *ClienteHttp) Enviar(metodo string, url string, mensaje *entidades.H
 	}
 
 	log.Printf("RESPUESTA DE PETICION %s : %d \n", url, responesDominio.StatusCode)
-	log.Printf("BODY : %v \n", string(bodyBytes))
+	// log.Printf("BODY : %v \n", string(bodyBytes))
 	return responesDominio, nil
 }
 

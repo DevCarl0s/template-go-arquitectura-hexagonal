@@ -32,6 +32,12 @@ func (PI *ProcesarInformacion) Ejecutar(data []byte) (*entidades_sincronizacion.
 			if mensaje, existe := datos["estado"].(string); existe {
 				parametro.Mensaje = mensaje
 			}
+			// if jsonResp, existe := datos["json_respuesta"].(entidades_sincronizacion.JsonRespuesta); existe {
+			// 	parametro.JsonRespuesta = jsonResp
+			// 	log.Println("XXXXXXXXXD")
+			// } else {
+			// 	log.Println("XDDDD")
+			// }
 		}
 	}
 
